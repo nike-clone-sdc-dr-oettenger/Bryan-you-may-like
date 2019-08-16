@@ -1,3 +1,4 @@
+//sda
 const faker = require('faker');
 const saveToDb = require('/Users/marcus/Code/you-may-like/database.js');
 
@@ -23,5 +24,9 @@ const seed = function() {
 // picture
 // gender
 
-seed();
+//seed();
+
+module.exports = {
+  seed: seed
+}
 //console.groupCollapsed('***************************************************************** \n', testArr);

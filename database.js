@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/nikeShoes');
 
+//sdfsdf
 let shoeSchema = mongoose.Schema({
   // TODO: your schema here!
   name: String,
@@ -32,6 +33,18 @@ let save = (shoe) => {
   })
 }
 
+const retrieve = function() {
+  Shoe.find(function(err, docs) {
+    console.log(docs)
+  })
+}
+
+const clearDb = function() {
+  Shoe.deleteMany({});
+}
+
 module.exports = {
-  save: save
+  save: save,
+  retrieve: retrieve,
+  clearDb: clearDb
 }

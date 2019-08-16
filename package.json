@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node seed.js"
+    "seed": "node runseed.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nike-clone-rpt/you-may-like.git"
   },
-  "author": "Marcus",
+  "author": "Marcuss",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/nike-clone-rpt/you-may-like/issues"
@@ -26,3 +26,4 @@
     "request": "^2.88.0"
   }
 }
+
