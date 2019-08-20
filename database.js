@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/nikeShoes');
+mongoose.connect('mongodb://localhost/nikeShoes', {useNewUrlParser: true});
 
 //sdfsdf
 let shoeSchema = mongoose.Schema({
@@ -16,6 +16,7 @@ let shoeSchema = mongoose.Schema({
 let Shoe = mongoose.model('Shoe', shoeSchema);
 
 let save = (shoe) => {
+  //console.log('save')
   // TODO: Your code here
   // This function should save a repo or repos to
   // the MongoDB
@@ -28,8 +29,8 @@ let save = (shoe) => {
     id: shoe.shoeId
   })
 
-  hemp.save(function(err, product) {
-    console.log('******* saved document *******')
+  return hemp.save(function(err, product) {
+   // console.log('******* saved document *******')
   })
 }
 
@@ -39,8 +40,11 @@ const retrieve = function() {
   })
 }
 
-const clearDb = function() {
-  Shoe.deleteMany({});
+const clearDb = function(callback) {
+  //console.log('delete many')
+  Shoe.deleteMany({}, function() {
+    callback();
+  });
 }
 
 module.exports = {

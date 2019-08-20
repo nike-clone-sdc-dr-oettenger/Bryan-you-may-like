@@ -6,7 +6,8 @@ const saveToDb = require('/Users/marcus/Code/you-may-like/database.js');
 
 //var testArr = [];
 
-const seed = function() {
+const seed = function(callback) {
+  var promiseArr = []
   for (let i = 0; i < 100; i ++) {
     var temp = {};
     temp.shoeId = i;
@@ -14,9 +15,13 @@ const seed = function() {
     temp.price = faker.random.number();
     temp.picture = faker.image.nightlife();
     temp.type = faker.commerce.productMaterial();
-    saveToDb.save(temp);
+    promiseArr.push(saveToDb.save(temp));
     //testArr.push(temp);
   }
+  Promise.all(promiseArr).then(function(values) {
+    //console.log('********************************************** \n', values.length);
+    callback(values);
+  })
 }
 // shoe Id
 // name
