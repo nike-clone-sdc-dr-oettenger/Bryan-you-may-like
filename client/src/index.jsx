@@ -11,4 +11,4 @@ class TestComp extends React.Component {
   }
 }
 
-ReactDOM.render(<TestComp />, document.getElementById('app'));
+ReactDOM.render(<TestComp />, document.getElementById('youMayLike'));
