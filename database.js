@@ -34,9 +34,11 @@ let save = (shoe) => {
   })
 }
 
-const retrieve = function() {
+const retrieve = function(res) {
   Shoe.find(function(err, docs) {
-    console.log(docs)
+    //console.log(docs)
+  }).limit(10).then(function(results) {
+    res.send(results);
   })
 }
 
