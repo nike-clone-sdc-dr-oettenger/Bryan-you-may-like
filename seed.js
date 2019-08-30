@@ -20,7 +20,10 @@ const seed = function(callback) {
   }
   Promise.all(promiseArr).then(function(values) {
     //console.log('********************************************** \n', values.length);
-    callback(values);
+    if (callback) {
+      callback(values);
+    }
+
   })
 }
 // shoe Id
