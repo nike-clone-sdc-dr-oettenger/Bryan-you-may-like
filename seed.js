@@ -1,6 +1,6 @@
 //sda
 const faker = require('faker');
-const saveToDb = require('/Users/marcus/Code/you-may-like/database.js');
+const saveToDb = require('./database.js');
 
 //console.log(faker.image.animals());
 
