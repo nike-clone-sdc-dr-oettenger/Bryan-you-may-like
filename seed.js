@@ -13,7 +13,7 @@ const seed = function(callback) {
     temp.shoeId = i;
     temp.name = faker.commerce.productName();
     temp.price = faker.random.number();
-    temp.picture = faker.image.nightlife();
+    
     temp.type = faker.commerce.productMaterial();
     promiseArr.push(saveToDb.save(temp));
     //testArr.push(temp);

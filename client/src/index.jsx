@@ -34,7 +34,7 @@ class TestComp extends React.Component {
           {elem.name}
           {elem.price}
           {elem.type}
-          <img src = {elem.picture}></img>
+          
         </div>
       )
     })
