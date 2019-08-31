@@ -1,5 +1,7 @@
+const path = require('path')
+
 module.exports = {
-  entry: '/Users/marcus/Code/you-may-like/client/src/index.jsx',
+  entry: path.join(__dirname, 'client/src/index.jsx'),
   module: {
     rules: [
       {

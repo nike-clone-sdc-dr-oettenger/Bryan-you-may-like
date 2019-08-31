@@ -1,9 +1,7 @@
 //erte
 const express = require('express');
 const bodyParser = require('body-parser');
-//const getRepos = require('/Users/marcus/Code/rpt15-fullstack-review/helpers/github.js');
-//const saveToDB = require('/Users/marcus/Code/rpt15-fullstack-review/database/index.js');
-//const seed = require('/Users/marcus/Code/you-may-like/seed.js');
+
 const db = require('./database.js');
 
 
