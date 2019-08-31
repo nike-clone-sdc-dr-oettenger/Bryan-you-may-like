@@ -30,4 +30,4 @@ app.get('/shoes', function (req, res) {
 //   console.log('i dont even care anymore bro');
 //   seed.seed();
 //   res.end()
-// })
+// })i need tis for a commit
