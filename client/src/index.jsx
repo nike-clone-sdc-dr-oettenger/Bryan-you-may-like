@@ -15,9 +15,9 @@ class TestComp extends React.Component {
     $.ajax({
       url: 'http://localhost:1128/shoes',
       success: (data) => {
-        console.log('data:', JSON.parse(data));
+        console.log('data:', typeof data);
         this.setState({
-          shoes: JSON.parse(data)
+          shoes: data
         })
       },
       error: (err) => {
