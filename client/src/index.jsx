@@ -30,6 +30,7 @@ class TestComp extends React.Component {
              data: {shoesArr: [0,1,2,3,4,5,6,7,8,9]},
              success: (bata) => {
                for (let i = 0; i < bata.length; i ++) {
+                 
                  this.state.shoes[i].image = bata[i];
                }
                this.setState({
