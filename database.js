@@ -38,7 +38,7 @@ const retrieve = function(res) {
   Shoe.find(function(err, docs) {
     //console.log(docs)
   }).limit(10).then(function(results) {
-    res.setHeader('access-control-allow-origin: *')
+    res.setHeader('access-control-allow-origin', '*')
     res.send(results);
   })
 }

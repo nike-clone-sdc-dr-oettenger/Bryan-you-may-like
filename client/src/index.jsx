@@ -38,6 +38,9 @@ class TestComp extends React.Component {
                }, () => {
                  console.log('shoe state:', this.state.shoes)
                })
+             },
+             error: (err) => {
+               console.log('inner ajax err', err);
              }
            })
         })
