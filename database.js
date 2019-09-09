@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-//mongoose.connect('mongodb://localhost/nikeShoes', {useNewUrlParser: true});
+mongoose.connect('mongodb+srv://Marcus:4815162342@youmaylike-necsu.mongodb.net/nikeshoes', {useNewUrlParser: true});
 
 //sdfsdf
 let shoeSchema = mongoose.Schema({
