@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-//import { threadId } from 'worker_threads';
+import styles from '../../public/styles.css'
 
 class TestComp extends React.Component {
 
@@ -15,7 +15,7 @@ class TestComp extends React.Component {
 
   componentDidMount() {
     $.ajax({
-      url: 'http://localhost:8081/shoes',
+      url: 'http://localhost:1128/shoes',
       success: (data) => {
         console.log('data:', data);
         this.setState({
@@ -55,7 +55,7 @@ class TestComp extends React.Component {
     if (this.state.shoes.length > 0) {
     var items = this.state.shoes.map((elem, i) => {
       return (
-        <div key = {i}>
+        <div className = {styles.testClass} key = {i}>
           {elem.name}
           {elem.price}
           {elem.type}
