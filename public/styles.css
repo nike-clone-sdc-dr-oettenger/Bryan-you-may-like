@@ -1,3 +1,33 @@
-testClass {
-  color: red
+
+body {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', 'Arial', 'sans-serif';
+  font-size: 12px
+}
+
+.elemName {
+
+  display: block
+}
+
+.elemPrice {
+
+  display: block;
+  float: right;
+  position: relative;
+  top: -15px
+}
+
+.elemType {
+  color: grey;
+  display: block
+}
+
+.image {
+  width: 300px;
+  height: 300px
+}
+
+.item {
+  display: inline-block;
+  margin-right: 15px
 }
