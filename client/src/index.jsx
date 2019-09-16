@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-//import { threadId } from 'worker_threads';
+import '../../public/styles.css'
 
 class TestComp extends React.Component {
 
@@ -55,17 +55,20 @@ class TestComp extends React.Component {
     if (this.state.shoes.length > 0) {
     var items = this.state.shoes.map((elem, i) => {
       return (
-        <div key = {i}>
-          {elem.name}
-          {elem.price}
-          {elem.type}
-          
+        
+        
+        <div className = 'item' key = {i}>
+          <img className = 'image' src = {elem.image}></img>
+          <span className = 'elemName'>{elem.name}</span>
+          <span className = 'elemPrice'>{'$' + elem.price}</span>
+          <span className = 'elemType'>{elem.type + ' Shoe'}</span>        
         </div>
       )
     })
    }
     return (
       <div>
+        <b className = 'boldText'>YOU MIGHT ALSO LIKE</b>
         {items}
       </div>
     )

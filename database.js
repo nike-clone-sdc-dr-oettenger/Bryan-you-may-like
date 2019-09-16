@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
+
 mongoose.connect('mongodb+srv://Marcus:4815162342@youmaylike-necsu.mongodb.net/nikeshoes?retryWrites=true&w=majority&authSource=true', {useNewUrlParser: true});
+
 
 //sdfsdf
 let shoeSchema = mongoose.Schema({

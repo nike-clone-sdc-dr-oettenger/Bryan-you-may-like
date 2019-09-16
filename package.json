@@ -7,7 +7,7 @@
     "test": "node test.js",
     "seed": "node runseed.js",
     "webpack": "webpack -d --watch",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
