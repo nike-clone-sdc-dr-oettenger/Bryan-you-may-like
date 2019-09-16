@@ -61,14 +61,14 @@ class TestComp extends React.Component {
           <img className = 'image' src = {elem.image}></img>
           <span className = 'elemName'>{elem.name}</span>
           <span className = 'elemPrice'>{'$' + elem.price}</span>
-          <span className = 'elemType'>{elem.type + ' Shoe'}</span>
-        
+          <span className = 'elemType'>{elem.type + ' Shoe'}</span>        
         </div>
       )
     })
    }
     return (
       <div>
+        <b className = 'boldText'>YOU MIGHT ALSO LIKE</b>
         {items}
       </div>
     )
