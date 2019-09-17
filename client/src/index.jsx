@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import '../../public/styles.css'
+//import '../../public/styles.css'
 
 class TestComp extends React.Component {
 
