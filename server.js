@@ -6,7 +6,7 @@ const db = require('./database.js');
 
 
 let app = express();
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static('./public'));
 
