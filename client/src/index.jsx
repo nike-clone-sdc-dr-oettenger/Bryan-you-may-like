@@ -15,7 +15,7 @@ class TestComp extends React.Component {
 
   componentDidMount() {
     $.ajax({
-      url: '54.188.46.243/shoes',
+      url: 'http://localhost:8081/shoes',
       success: (data) => {
         console.log('data:', data);
         this.setState({
