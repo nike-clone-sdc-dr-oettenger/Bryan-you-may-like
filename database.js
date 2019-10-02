@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/shoes', {useNewUrlParser: true});
 
 
-//sdfsdf
 let shoeSchema = mongoose.Schema({
   // TODO: your schema here!
   name: String,
@@ -19,10 +18,6 @@ let shoeSchema = mongoose.Schema({
 let Shoe = mongoose.model('Shoe', shoeSchema);
 
 let save = (shoe) => {
-  //console.log('save')
-  // TODO: Your code here
-  // This function should save a repo or repos to
-  // the MongoDB
 
   var hemp = new Shoe({
     name: shoe.name,
@@ -37,6 +32,7 @@ let save = (shoe) => {
   })
 }
 
+// GET
 const retrieve = function(res) {
   Shoe.find(function(err, docs) {
     //console.log(docs)
@@ -46,6 +42,49 @@ const retrieve = function(res) {
   })
 }
 
+// POST
+const createShoe = (shoe, callback) => {
+  let newShoe = new Shoe(shoe);
+  newShoe.save(err => {
+    if (err) {
+      console.error(err);
+    } else {
+      callback(null);
+    }
+  })
+}
+
+// PUT
+const updateShoe = (shoe, callback) => {
+  Shoe.findOneAndUpdate({
+    name: shoe.name,
+    picture: shoe.picture,
+    type: shoe.type
+  },
+  {
+    id: shoe.id,
+    price: shoe.price
+  }, (err) => {
+    if (err) {
+      console.error(err);
+    } else {
+      callback(null);
+    }
+  })
+}
+
+// DELETE
+const deleteShoe = (shoeId, callback) => {
+  Shoe.deleteOne({ id: shoeId }, (err) => {
+    if (err) {
+      console.error(err);
+    } else {
+      callback(null)
+    }
+  })
+}
+
+
 const clearDb = function(callback) {
   //console.log('delete many')
   Shoe.deleteMany({}, function() {
@@ -54,7 +93,11 @@ const clearDb = function(callback) {
 }
 
 module.exports = {
+  Shoe: Shoe,
   save: save,
   retrieve: retrieve,
+  createShoe: createShoe,
+  updateShoe: updateShoe,
+  deleteShoe: deleteShoe,
   clearDb: clearDb
 }

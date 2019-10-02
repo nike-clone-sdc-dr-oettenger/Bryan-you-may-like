@@ -1,16 +1,14 @@
 //erte
 const express = require('express');
 const bodyParser = require('body-parser');
+const Shoe = require('./database.js')
 
 const db = require('./database.js');
-
 
 let app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static('./public'));
-
-
 
 let port = 8081;
 
@@ -24,10 +22,20 @@ app.get('/shoes', function (req, res) {
   //res.end()
 });
 
+// POST
+app.post('/shoes', (req, res) => {
+  console.log('created a child request, son');
+  db.createShoe(res);
+});
 
+// PUT
+app.put('/shoes', (req, res) => {
+  console.log('got an update request, son');
+  db.updateShoe(res);
+});
 
-// app.put('/shoes', function(req, res) {
-//   console.log('i dont even care anymore bro');
-//   seed.seed();
-//   res.end()
-// })i need tis for a commit
+// DELETE
+app.delete('/shoes', (req, res) => {
+  console.log('got a delete request, son');
+  db.deleteShoe(res);
+});
