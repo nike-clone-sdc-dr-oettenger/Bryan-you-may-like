@@ -1,6 +1,6 @@
 //3242
-const db = require('/Users/marcus/Code/you-may-like/database.js');
-const seed = require('/Users/marcus/Code/you-may-like/seed.js');
+const db = require('../database/database.js');
+const seed = require('../database/seed.js');
 const request = require('request');
 
 
@@ -16,7 +16,7 @@ const shouldEqual100 = function(arr) {
 const shouldHaveWorkingEndpoints = function() {
   console.log('--- Should have working endpoints ---')
   request({
-    url: 'http://127.0.0.1:1128/shoes'
+    url: 'http://localhost:8081/shoes'
   }, function(err, res, body) {
     if (err) {
       console.log('your test failed, son');
