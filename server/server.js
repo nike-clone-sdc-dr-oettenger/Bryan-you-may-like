@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const postgresQuery = require('../database/postgresQuery.js');
 
 const db = require('../database/database.js');
 

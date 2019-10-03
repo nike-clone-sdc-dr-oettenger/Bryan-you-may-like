@@ -7,4 +7,18 @@
 
 - 2019/10/02
   - refactored repo layout
+  # PostgreSQL
+  - installing postgres
+    - 'brew install postgres'
+  - start postgres
+    - 'brew services start postgresql'
+    - 'pg_ctl -D /usr/local/var/postgres start'
+  - commands
+    - \dt - show tables
+    - \d table_name - describe table
+    - \q - quit
+    - \c dbname username - switch connection to new database
+
+
+
   
