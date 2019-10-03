@@ -1,14 +1,12 @@
-//erte
 const express = require('express');
 const bodyParser = require('body-parser');
-const Shoe = require('./database.js')
 
-const db = require('./database.js');
+const db = require('../database/database.js');
 
 let app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(express.static('./public'));
+app.use(express.static(__dirname + '/../client/dist'));
 
 let port = 8081;
 
