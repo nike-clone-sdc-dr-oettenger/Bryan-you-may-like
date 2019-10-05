@@ -21,10 +21,14 @@ app.get('/shoes', function (req, res) {
   //res.end()
 });
 
+
+/*************ADDITIONAL ENDPOINTS*************** */
+
 // POST
 app.post('/shoes', (req, res) => {
   console.log('created a child request, son');
-  db.createShoe(res);
+  // console.log(res)
+  db.save(res);
 });
 
 // PUT

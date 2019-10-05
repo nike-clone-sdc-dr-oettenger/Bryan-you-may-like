@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+const postgresQuery = require('../database/postgresQuery.js');
+
+
 // mongoose.connect('mongodb+srv://Marcus:4815162342@youmaylike-necsu.mongodb.net/nikeshoes?retryWrites=true&w=majority&authSource=true', {useNewUrlParser: true});
 mongoose.connect('mongodb://localhost/shoes', {useNewUrlParser: true});
 
@@ -45,6 +48,10 @@ const retrieve = function(res) {
 // POST
 const createShoe = (shoe, callback) => {
   let newShoe = new Shoe(shoe);
+
+  // postgresQuery.post.psqlPost()
+  // curl -d "name=shoe&price=5&picture=string&type=cotton&id=999" -X POST http://localhost:8081/shoes
+
   newShoe.save(err => {
     if (err) {
       console.error(err);
@@ -55,7 +62,7 @@ const createShoe = (shoe, callback) => {
 }
 
 // PUT
-const updateShoe = (shoe, callback) => {
+const updateShoe = (shoe) => {
   Shoe.findOneAndUpdate({
     name: shoe.name,
     picture: shoe.picture,
@@ -68,18 +75,38 @@ const updateShoe = (shoe, callback) => {
     if (err) {
       console.error(err);
     } else {
-      callback(null);
+      // callback(null);
+      console.log('updated shoe')
     }
   })
 }
 
 // DELETE
-const deleteShoe = (shoeId, callback) => {
-  Shoe.deleteOne({ id: shoeId }, (err) => {
+// const deleteShoe = (shoeId, callback) => {
+//   Shoe.deleteOne({ id: shoeId }, (err) => {
+//     if (err) {
+//       console.error(err);
+//     } else {
+//       callback(null)
+//     }
+//   })
+// }
+
+const deleteShoe = (shoe, callback) => {
+  Shoe.findOneAndUpdate({
+    name: '',
+    picture: '',
+    type: ''
+  },
+  {
+    id: null,
+    price: null
+  }, (err) => {
     if (err) {
       console.error(err);
     } else {
-      callback(null)
+      // callback(null);
+      console.log('deleted shoe')
     }
   })
 }
@@ -101,3 +128,12 @@ module.exports = {
   deleteShoe: deleteShoe,
   clearDb: clearDb
 }
+
+// postgres command for creating table
+// CREATE TABLE shoes (ID SERIAL PRIMARY KEY, name VARCHAR(250), picture VARCHAR(250), id int, price int, type VARCHAR(250))
+
+// name: String,
+// picture: String,
+// id: Number,
+// price: Number,
+// type: String
