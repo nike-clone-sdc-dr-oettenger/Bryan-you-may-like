@@ -21,4 +21,7 @@
 
 
 
+- mysql commands
+  - load schema - mysql -u root < database/mysql/schema.sql
+  - login - mysql -u root
   

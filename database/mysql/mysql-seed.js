@@ -6,22 +6,25 @@ let totalCounter = 0;
 function randomPrice(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
+// console.log(randomPrice(1000));
 
-const seedShoes = (numOfShoes) => {
-  const queryString = `INSERT INTO shoes (name, picture, price, type) VALUES (?, ?, ?, ?)`
-
+const seedShoes = async (numOfShoes) => {
+  // querying 20 at at time
+  const queryString = `INSERT INTO shoes (name, picture, price, type) VALUES (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?)`
   let queryArgs = [];
 
   for (let i = 0; i < numOfShoes; i++) {
-    queryArgs.push(faker.lorem.word());
-    queryArgs.push(faker.image.imageUrl());
-    queryArgs.push(randomPrice(10000));
-    queryArgs.push(faker.lorem.word());
+    for (let j = 0; j < 20; j++) {
+      queryArgs.push(faker.lorem.word());
+      queryArgs.push(faker.image.imageUrl());
+      queryArgs.push(randomPrice(1000));
+      queryArgs.push(faker.lorem.word());
+    }
   }
 
-  while (totalCounter < 10000) {
+  while (totalCounter < 10000000) {
     try {
-      db.pool.query(queryString, queryArgs)
+      await db.pool.query(queryString, queryArgs)
         .then(() => {
           totalCounter = totalCounter + 20;
         })
@@ -32,11 +35,11 @@ const seedShoes = (numOfShoes) => {
       console.log(error)
     }
   }
-  console.log(totalCounter);
+  // console.log(totalCounter);
   return process.exit();
 };
 
-seedShoes(1)
+seedShoes(10000)
 
 // name: String,
 // picture: String,
