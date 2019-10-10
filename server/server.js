@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// const postgresQuery = require('../database/postgresQuery.js');
 
 const db = require('../database/database.js');
 
@@ -15,10 +14,22 @@ app.listen(port, function() {
   console.log(`listening on port ${port}`);
 });
 
+// get request for mysql
+// app.get('/shoes', function (req, res) {
+//   console.log('got a child request, son');
+//   db.retrieve(res)
+//   //res.end()
+// });
+
+// get request for couchdb
 app.get('/shoes', function (req, res) {
-  console.log('got a child request, son');
-  db.retrieve(res)
-  //res.end()
+  console.log('got a child request for couchdb, son');
+  couch.get(dbName, viewUrl).then((data, headers, status) => {
+    res.json(data.data.rows);
+  },
+  (err) => {
+    res.send(err);
+  })
 });
 
 
@@ -30,6 +41,13 @@ app.post('/shoes', (req, res) => {
   // console.log(res)
   db.save(res);
 });
+
+// POST for couchDB
+// app.post('/shoes', (req, res) => {
+//   console.log('created a child request for couchdb, son');
+//   // console.log(res)
+//   db.save(res);
+// });
 
 // PUT
 app.put('/shoes', (req, res) => {

@@ -14,5 +14,3 @@ CREATE TABLE shoes (
   type VARCHAR(250),
   PRIMARY KEY (id)
 );
-
-INSERT INTO shoes (name, picture, price, type) VALUES ('shoey', 'picture', '57', 'cotton' )
