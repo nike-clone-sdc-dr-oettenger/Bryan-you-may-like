@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+// const couch = require('node-couch')
 
 const db = require('../database/database.js');
 
@@ -15,6 +16,13 @@ app.listen(port, function() {
 });
 
 // get request for mysql
+app.get('/shoes', function (req, res) {
+  console.log('got a child request for mysql, son');
+  db.retrieveMysql(res)
+  //res.end()
+});
+
+// get request for mongo
 // app.get('/shoes', function (req, res) {
 //   console.log('got a child request, son');
 //   db.retrieve(res)
@@ -22,15 +30,15 @@ app.listen(port, function() {
 // });
 
 // get request for couchdb
-app.get('/shoes', function (req, res) {
-  console.log('got a child request for couchdb, son');
-  couch.get(dbName, viewUrl).then((data, headers, status) => {
-    res.json(data.data.rows);
-  },
-  (err) => {
-    res.send(err);
-  })
-});
+// app.get('/shoes', function (req, res) {
+//   console.log('got a child request for couchdb, son');
+//   couch.get(dbName, viewUrl).then((data, headers, status) => {
+//     res.json(data.data.rows);
+//   },
+//   (err) => {
+//     res.send(err);
+//   })
+// });
 
 
 /*************ADDITIONAL ENDPOINTS*************** */

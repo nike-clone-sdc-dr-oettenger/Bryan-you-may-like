@@ -40,4 +40,5 @@
   - curl -X GET $SERVER/_uuids
     - creates new id for a document
     - curl -X PUT $SERVER/youmaylike/575e92f698c0539c07c23a7a280024cb -d "{\"name\":\"Super Sick Shoes\",\"picture\":\"http://lorempixel.com/400/200/sports/1/\",\"price\":75,\"type\":\"metal\"}"
+  - mysql -u root < database/mysql/schema.sql
 
