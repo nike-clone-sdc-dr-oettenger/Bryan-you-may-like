@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
+const mysqlApi = require('../database/models/index.js');
 
-const postgresQuery = require('../database/postgresQuery.js');
 
 
 // mongoose.connect('mongodb+srv://Marcus:4815162342@youmaylike-necsu.mongodb.net/nikeshoes?retryWrites=true&w=majority&authSource=true', {useNewUrlParser: true});
@@ -35,12 +35,19 @@ let save = (shoe) => {
   })
 }
 
-// GET
+// GET for Mongo
 const retrieve = function(res) {
   Shoe.find(function(err, docs) {
     //console.log(docs)
   }).limit(10).then(function(results) {
     res.setHeader('access-control-allow-origin', '*')
+    res.send(results);
+  })
+}
+
+// GET for mysql
+const retrieveMysql = function(res) {
+  mysqlApi.getAllData((results) => {
     res.send(results);
   })
 }
@@ -123,6 +130,7 @@ module.exports = {
   Shoe: Shoe,
   save: save,
   retrieve: retrieve,
+  retrieveMysql: retrieveMysql,
   createShoe: createShoe,
   updateShoe: updateShoe,
   deleteShoe: deleteShoe,
