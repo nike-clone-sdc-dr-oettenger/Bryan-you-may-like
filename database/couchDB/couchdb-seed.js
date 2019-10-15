@@ -8,7 +8,7 @@ function randomPrice(max) {
 }
 // console.log(randomPrice(1000));
 
-const seedShoes = async (numOfShoes) => {
+const seedShoes = (numOfShoes) => {
   if (numOfShoes < 10000) {
     const shoeArray = [];
 
@@ -22,10 +22,10 @@ const seedShoes = async (numOfShoes) => {
         type: faker.lorem.word()
       });
     }
-    await youmaylikeDatabase.bulk({ docs: shoeArray }).then(() => {
+    youmaylikeDatabase.bulk({ docs: shoeArray }).then(() => {
       numOfShoes++;
       seedShoes(numOfShoes);
-      // console.log('bulking data succeeded', numOfShoes)
+      console.log('bulking data succeeded', numOfShoes)
     }).catch((err) => {
       console.error(err);
     })

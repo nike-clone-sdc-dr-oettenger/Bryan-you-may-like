@@ -1,9 +1,8 @@
 const mysqlDb = require('../mysql/index.js');
 
-
 module.exports = {
-  getAllData: (callback) => {
-    let queryString = `SELECT * FROM shoes`;
+  getOneData: (callback) => {
+    let queryString = `SELECT * FROM shoes LIMIT 1`;
     mysqlDb.pool.query(queryString, (err, results) => {
       if (err) {
         console.error(err);
@@ -13,8 +12,8 @@ module.exports = {
     })
   },
 
-  getSomeData: (callback) => {
-    let queryString = `SELECT * FROM shoes LIMIT 10`;
+  getAllData: (callback) => {
+    let queryString = `SELECT * FROM shoes LIMIT 100`;
 
     mysqlDb.pool.query(queryString, (err, results) => {
       if (err) {

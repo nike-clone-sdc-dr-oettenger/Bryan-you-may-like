@@ -47,7 +47,7 @@ const retrieve = function(res) {
 
 // GET for mysql
 const retrieveMysql = function(res) {
-  mysqlApi.getSomeData((results) => {
+  mysqlApi.getAllData((results) => {
     res.send(results);
   })
 }
