@@ -109,7 +109,7 @@ curl -X PUT $SERVER/youmaylike/575e92f698c0539c07c23a7a280024cb -d "{\"name\":\"
 ## 3.0 Log 
 
 ### Issue Complaints
-1.  At first I was going to use Postgres, but for some reason, I wasn't able to grasp how it worked. I tried for a few days, but couldn't figure it out. I did some research and there is a "knex" SQL query builder that I looked into and tried using that, but couldn't figuer it out. In the end, I decided to just use Mysql since I was a bit more familiar with it
+1.  At first I was going to use Postgres, but for some reason, I wasn't able to grasp how it worked. I tried for a few days, but couldn't figure it out. I did some research and there is a "knex" SQL query builder that I looked into and tried using that, but couldn't figuer it out. In the end, I decided to just use Mysql since I was a bit more familiar with it. It ended up being okay. 
 
 2. My 
 
