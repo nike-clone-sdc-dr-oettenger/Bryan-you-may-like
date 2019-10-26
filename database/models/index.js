@@ -22,18 +22,18 @@ module.exports = {
         console.error(err);
       } else {
         // console.log(results);
-        callback(null, results);
+        callback(results);
       }
     })
   },
 
   postOneData: () => {
     let queryString = 'INSERT INTO shoes (name, picture, price, type) VALUES (?, ?, ?, ?)';
-    let queryArgs = ['testing'];
+    let queryArgs = [];
     
     queryArgs.push(faker.lorem.word());
     queryArgs.push(faker.image.imageUrl());
-    queryArgs.push(randomPrice(1000));
+    queryArgs.push(1000);
     queryArgs.push(faker.lorem.word());
 
     mysqlDb.pool.query(queryString, queryArgs, (err, results) => {
@@ -46,7 +46,7 @@ module.exports = {
   },
 
   putTheData: (columnName, value) => {
-    let queryString = `UPDATE shoes SET ? = ?`;
+    let queryString = 'UPDATE shoes SET ? = ?';
     let queryArgs = [];
 
     queryArgs.push(columnName);
@@ -61,7 +61,15 @@ module.exports = {
     })
   },
 
-  deleteTheData: () => {
+  deleteTheData: (shoeId) => {
+    let queryString = 'DELETE FROM shoes WHERE id = ?';
 
+    mysqlDb.pool.query(queryString, shoeId, (err, results) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log('We deleted the data ---> ', results)
+      }
+    })
   }
 }

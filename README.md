@@ -111,8 +111,38 @@ curl -X PUT $SERVER/youmaylike/575e92f698c0539c07c23a7a280024cb -d "{\"name\":\"
 ### Issue Complaints
 1.  At first I was going to use Postgres, but for some reason, I wasn't able to grasp how it worked. I tried for a few days, but couldn't figure it out. I did some research and there is a "knex" SQL query builder that I looked into and tried using that, but couldn't figuer it out. In the end, I decided to just use Mysql since I was a bit more familiar with it. It ended up being okay. 
 
-2. My 
+2. It was stated that Cassandra was a pain, so I decided not to go that route. The next thing to use on Learn mentioned Riak, but it did not seem like there was very much information on it and I did not like the documentation. My SDC mates decided to use CouchDB so I followed their lead.
 
 ### 3.1 MySql Issues
 
-SO MANY ISSUES 
+1.  It took me a while to figure out how to batch the data. Eventually, I found batching the data would help me seed the data without the server timing out. Also, learning more about async and await was extremely helpful
+
+### 3.2 CouchDB Issues
+
+1.  Using CouchDB was a little strange. At first I had to deal with this external app called Fauxton to see the different data was was inputted into the database. I was very used to Mongo which was slightly more intuitive to me. 
+
+### 3.3 New Relic
+
+- npm install newrelic
+- copy license key: 10024f6bcc411343a7fb86dac7de49da99d92d16
+- copy newrelic.js from node_modules/newrelic into root directory
+
+
+### 3.4 DMBS Benchmarking
+
+1. Using the mysql benchmark function, I queried 1 million records.
+
+```
+mysql> SELECT BENCHMARK(1000000,1+1);
++------------------------+
+| BENCHMARK(1000000,1+1) |
++------------------------+
+|                      0 |
++------------------------+
+1 row in set (0.02 sec)
+```
+#### 3.4.1 k6 Setup
+
+- brew install k6
+- load the script
+  - k6 run k6Tests.js

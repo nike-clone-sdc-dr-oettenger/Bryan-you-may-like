@@ -1,6 +1,7 @@
+const newrelic = require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
-const dbCRUD = require('.//database/models/index.js');
+const dbCRUD = require('../database/models/index.js');
 // const couch = require('node-couch')
 
 const db = require('../database/database.js');
@@ -19,8 +20,6 @@ app.listen(port, function() {
 // get request for mysql
 app.get('/shoes', function (req, res) {
   console.log('got a child request for mysql, son');
-  // db.retrieveMysql(res)
-  //res.end()
   dbCRUD.getAllData(results => {
     res.send(results);
   })
@@ -63,11 +62,11 @@ app.post('/shoes', (req, res) => {
 // PUT
 app.put('/shoes', (req, res) => {
   console.log('got an update request, son');
-  db.updateShoe(res);
+  dbCRUD.putTheData(columnName, value);
 });
 
 // DELETE
 app.delete('/shoes', (req, res) => {
   console.log('got a delete request, son');
-  db.deleteShoe(res);
+  dbCRUD.deleteTheData(res);
 });
