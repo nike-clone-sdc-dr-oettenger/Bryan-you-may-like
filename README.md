@@ -68,6 +68,8 @@ CREATE TABLE shoes (
 );
 ```
 #### Connecting to MySQL with commands
+* DON'T FORGET TO START THE MYSQL SERVER
+  * mysql.server start
 * Load the schema file
   * mysql -u root < database/mysql/schema.sql
 * Login
@@ -146,3 +148,9 @@ mysql> SELECT BENCHMARK(1000000,1+1);
 - brew install k6
 - load the script
   - k6 run k6Tests.js
+
+#### 3.4.2 Deploying on EC2
+
+##### 3.4.2.1 Installing Dockerr
+- npm install -g docker
+

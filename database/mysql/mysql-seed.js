@@ -9,7 +9,10 @@ function randomPrice(max) {
 // console.log(randomPrice(1000));
 
 const seedShoes = async (numOfShoes) => {
+  let startTime = new Date().toLocaleTimeString();
+  console.log('Starting time', startTime)
   // querying 20 at at time
+  
   const queryString = `INSERT INTO shoes (name, picture, price, type) VALUES (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?)`
   let queryArgs = [];
 
@@ -36,6 +39,9 @@ const seedShoes = async (numOfShoes) => {
     }
   }
   // console.log(totalCounter);
+  let endTime = new Date().toLocaleTimeString();
+  console.log('Ending time', endTime)
+  console.log('Total Counter: ', totalCounter);
   return process.exit();
 };
 
