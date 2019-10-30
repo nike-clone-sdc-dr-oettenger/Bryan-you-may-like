@@ -68,6 +68,8 @@ CREATE TABLE shoes (
 );
 ```
 #### Connecting to MySQL with commands
+* DON'T FORGET TO START THE MYSQL SERVER
+  * mysql.server start
 * Load the schema file
   * mysql -u root < database/mysql/schema.sql
 * Login
@@ -146,3 +148,19 @@ mysql> SELECT BENCHMARK(1000000,1+1);
 - brew install k6
 - load the script
   - k6 run k6Tests.js
+
+#### 3.4.2 Deploying on EC2
+
+1.  CD into the folder with the .pem file that you downloaded from starting the EC2 instance
+2.  ```chmod 400 youMayLike.pem```
+3.  ```ssh -i "youMayLike.pem" ec2-user@ec2-3-92-216-214.compute-1.amazonaws.com```
+4.  ```sudo yum install git```
+5.  Setting up node.js
+  * https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html
+  * ```curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash```
+  * ```. ~/.nvm/nvm.sh```
+  * ```nvm install node```
+  * ```node -e "console.log('Running Node.js ' + process.version)"```
+6.  git clone <repo>
+7.  cd into <repo>
+
