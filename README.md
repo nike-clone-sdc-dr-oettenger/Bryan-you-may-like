@@ -153,7 +153,7 @@ mysql> SELECT BENCHMARK(1000000,1+1);
 
 1.  CD into the folder with the .pem file that you downloaded from starting the EC2 instance
 2.  ```chmod 400 youMayLike.pem```
-3.  ```ssh -i "youMayLike.pem" ec2-user@ec2-3-92-216-214.compute-1.amazonaws.com```
+3.  ```ssh -i "youMayLike.pem" ec2-user@ec2-184-73-137-131.compute-1.amazonaws.com```
 4.  ```sudo yum install git```
 5.  Setting up node.js
   * https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html
@@ -164,3 +164,11 @@ mysql> SELECT BENCHMARK(1000000,1+1);
 6.  git clone <repo>
 7.  cd into <repo>
 
+#### 3.4.3 Installing mySQL in EC2 Instance
+
+1.  CD into the folder with the .pem file that you downloaded from starting the EC2 instance
+2.  ```chmod 400 youMayLikeDB1.pem```
+3.  ```ssh -i "youMayLikeDB1.pem" ec2-user@ec2-54-144-4-37.compute-1.amazonaws.com```
+4.  ```sudo yum install mysql-server```
+5.  Start the mysql ```sudo service mysqld start```
+6.  Seed the database: ```node database/mysql/mysql-seed.js && sleep 2 && nodemon server/server.js```
