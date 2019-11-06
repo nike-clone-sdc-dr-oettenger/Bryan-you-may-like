@@ -2,13 +2,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const dbCRUD = require('../database/models/index.js');
+const cors = require('cors');
 // const couch = require('node-couch')
 
 // const db = require('../database/database.js');
 
 let app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(cors());
 app.use(express.static(__dirname + '/../client/dist'));
 
 let port = 8081;
