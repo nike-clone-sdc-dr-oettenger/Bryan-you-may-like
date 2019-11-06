@@ -153,7 +153,7 @@ mysql> SELECT BENCHMARK(1000000,1+1);
 
 1.  CD into the folder with the .pem file that you downloaded from starting the EC2 instance
 2.  ```chmod 400 youMayLike.pem```
-3.  ```ssh -i "youMayLike.pem" ec2-user@ec2-184-73-137-131.compute-1.amazonaws.com```
+3.  ```ssh -i "youMayLike.pem" ec2-user@ec2-13-56-180-191.us-west-1.compute.amazonaws.com```
 4.  ```sudo yum install git```
 5.  Setting up node.js
   * https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html
