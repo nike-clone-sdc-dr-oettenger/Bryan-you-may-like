@@ -1,10 +1,10 @@
-const newrelic = require('newrelic');
+// const newrelic = require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const dbCRUD = require('../database/models/index.js');
 // const couch = require('node-couch')
 
-const db = require('../database/database.js');
+// const db = require('../database/database.js');
 
 let app = express();
 app.use(bodyParser.urlencoded({ extended: false }));

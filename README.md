@@ -167,8 +167,10 @@ mysql> SELECT BENCHMARK(1000000,1+1);
 #### 3.4.3 Installing mySQL in EC2 Instance
 
 1.  CD into the folder with the .pem file that you downloaded from starting the EC2 instance
-2.  ```chmod 400 youMayLikeDB1.pem```
-3.  ```ssh -i "youMayLikeDB1.pem" ec2-user@ec2-54-144-4-37.compute-1.amazonaws.com```
+2.  ```chmod 400 youMayLikeDB.pem```
+  * This changes depending on what you are deploying
+3.  ```ssh -i "youMayLikeDB.pem" ec2-user@ec2-13-52-247-174.us-west-1.compute.amazonaws.com```
+  * This changes depending on what you are deploying
 4.  ```sudo yum install mysql-server```
 5.  Start the mysql ```sudo service mysqld start```
 6.  Seed the database: ```node database/mysql/mysql-seed.js && sleep 2 && nodemon server/server.js```
