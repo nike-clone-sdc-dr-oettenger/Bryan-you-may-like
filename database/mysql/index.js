@@ -7,7 +7,7 @@ const pool = mysql.createPool({
   // connectTimeout: 60 * 60 * 1000,
   // acquireTimeout: 60 * 60 * 1000,
   // timeout: 60 * 60 * 1000,
-  host: 'localhost',
+  host: 'ec2-13-52-247-174.us-west-1.compute.amazonaws.com',
   user: 'root',
   password: '',
   database: 'youMayLike',
