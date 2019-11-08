@@ -10,7 +10,7 @@ const pool = mysql.createPool({
   host: 'ec2-13-52-247-174.us-west-1.compute.amazonaws.com',
   // host: 'localhost',
   user: 'root',
-  password: '',
+  password: 'password',
   database: 'youMayLike',
   port: '3306'
 });
