@@ -14,6 +14,8 @@ module.exports = {
     })
   },
 
+  // blarg
+
   getAllData: (callback) => {
     let queryString = `SELECT * FROM shoes LIMIT 100`;
 
