@@ -19,7 +19,7 @@ const seedShoes = async (numOfShoes) => {
   for (let i = 0; i < numOfShoes; i++) {
     for (let j = 0; j < 20; j++) {
       queryArgs.push(faker.lorem.word());
-      queryArgs.push(faker.image.imageUrl());
+      // queryArgs.push(faker.image.imageUrl());
       queryArgs.push('http://lorempixel.com/g/270/270/');
       queryArgs.push(randomPrice(1000));
       queryArgs.push(faker.lorem.word());
