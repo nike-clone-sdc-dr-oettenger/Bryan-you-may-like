@@ -169,7 +169,7 @@ mysql> SELECT BENCHMARK(1000000,1+1);
 1.  CD into the folder with the .pem file that you downloaded from starting the EC2 instance
 2.  ```chmod 400 youMayLikeDB.pem```
   * This changes depending on what you are deploying
-3.  ```ssh -i "youMayLikeDB.pem" ec2-user@ec2-13-52-247-174.us-west-1.compute.amazonaws.com```
+3.  ```ssh -i "youMayLikeDB.pem" ec2-user@ec2-13-52-212-223.us-west-1.compute.amazonaws.com```
   * This changes depending on what you are deploying
 4.  ```sudo yum install mysql-server```
 5.  Start the mysql ```sudo service mysqld start```
