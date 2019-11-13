@@ -29,7 +29,7 @@ module.exports = {
     })
   },
 
-  postOneData: () => {
+  postOneData: (callback) => {
     let queryString = 'INSERT INTO shoes (name, picture, price, type) VALUES (?, ?, ?, ?)';
     let queryArgs = [];
     
@@ -43,6 +43,7 @@ module.exports = {
         console.error(err);
       } else {
         console.log('We saved a thing to mysql database!');
+        callback(err, results)
       }
     })
   },
