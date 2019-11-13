@@ -50,7 +50,15 @@ app.get('/shoes', function (req, res) {
 // POST
 app.post('/shoes', (req, res) => {
   console.log('created a child request, son');
-  dbCRUD.postOneData();
+  dbCRUD.postOneData(req.body, (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+      res.send('not saved');
+    } else {
+      res.status(201);
+      res.send('saved it!')
+    }
+  });
 });
 
 // POST for couchDB
