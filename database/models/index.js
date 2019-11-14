@@ -29,9 +29,10 @@ module.exports = {
     })
   },
 
-  postOneData: (callback) => {
+  postOneData: (data, callback) => {
     let queryString = 'INSERT INTO shoes (name, picture, price, type) VALUES (?, ?, ?, ?)';
     let queryArgs = [];
+    console.log('DATA ---> ', data)
     
     queryArgs.push(faker.lorem.word());
     queryArgs.push(faker.image.imageUrl());
