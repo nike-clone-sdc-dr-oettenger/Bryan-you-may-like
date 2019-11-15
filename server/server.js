@@ -3,6 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const dbCRUD = require('../database/models/index.js');
 const cors = require('cors');
+const redis = require('redis');
+const client = redis.createClient();
 // const couch = require('node-couch')
 
 // const db = require('../database/database.js');
@@ -19,10 +21,25 @@ app.listen(port, function() {
 });
 
 // get request for mysql
+// app.get('/shoes', function (req, res) {
+//   console.log('got a child request for mysql, son');
+//   dbCRUD.getAllData(results => {
+//     res.send(results);
+//   })
+// });
+
+// get request for mysql using Redis
 app.get('/shoes', function (req, res) {
   console.log('got a child request for mysql, son');
-  dbCRUD.getAllData(results => {
-    res.send(results);
+  return client.get((err, results) => {
+    if (results) {
+      console.log('RESULTS -->', results)
+    } else {
+      dbCRUD.getAllData(results => {
+        client.set(JSON.stringify(results), redis.print)
+        res.send(results);
+      })
+    }
   })
 });
 

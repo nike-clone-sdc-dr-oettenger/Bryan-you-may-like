@@ -174,3 +174,14 @@ mysql> SELECT BENCHMARK(1000000,1+1);
 4.  ```sudo yum install mysql-server```
 5.  Start the mysql ```sudo service mysqld start```
 6.  Seed the database: ```node database/mysql/mysql-seed.js && sleep 2 && nodemon server/server.js```
+
+
+### Installing Redis Cache
+1. ```wget http://download.redis.io/redis-stable.tar.gz```
+2. ```tar xvzf redis-stable.tar.gz```
+3. ```cd redis-stable```
+4. ```make```
+5. ```sudo yum install -y tcl```
+  a. This might be needed to test to see if Redis is installed correctly
+6. ```make test``` to test Redis
+  a. ```\o/ All tests passed without errors!``` is what you should see if all the tests pass and Redis is installed correctly
