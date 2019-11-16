@@ -28,6 +28,7 @@ Example shape of data:
 ```
 
 ## 2.0 Setup
+
 ### 2.1 MySQL Setup
 * Install mysql with `npm install mysql`
 * Create connection file
@@ -72,8 +73,11 @@ CREATE TABLE shoes (
   * mysql.server start
 * Load the schema file
   * mysql -u root < database/mysql/schema.sql
+  * with pass word: mysql -u root -p < database/mysql/schema.sql
 * Login
   * mysql -u root
+* Login with password if you needed to create one
+  * mysql -u root -p 
 
 ### 2.2 CouchDB Setup
 * Download the Apache CouchDB 
@@ -129,6 +133,17 @@ curl -X PUT $SERVER/youmaylike/575e92f698c0539c07c23a7a280024cb -d "{\"name\":\"
 - copy license key: 10024f6bcc411343a7fb86dac7de49da99d92d16
 - copy newrelic.js from node_modules/newrelic into root directory
 
+### MySQL Database seeding
+
+This part took me a while to figure out. My seeding would always time out and then I would always get these protocol errors when seeding my database. After a lot of playing around with how the code was seeded and revising my seeding file, I was able to seed my database successfully with 10,000,000 records.
+
+Here's a snippet from my console after running the seeding file.
+
+```
+Starting time 7:13:30 PM
+Ending time 7:16:16 PM
+Total Counter: 10000000
+```
 
 ### 3.4 DMBS Benchmarking
 
@@ -143,11 +158,14 @@ mysql> SELECT BENCHMARK(1000000,1+1);
 +------------------------+
 1 row in set (0.02 sec)
 ```
+
+
 #### 3.4.1 k6 Setup
 
 - brew install k6
 - load the script
   - k6 run k6Tests.js
+
 
 #### 3.4.2 Deploying on EC2
 
@@ -175,13 +193,60 @@ mysql> SELECT BENCHMARK(1000000,1+1);
 5.  Start the mysql ```sudo service mysqld start```
 6.  Seed the database: ```node database/mysql/mysql-seed.js && sleep 2 && nodemon server/server.js```
 
+### 3.4.4 Initial Testing
 
-### Installing Redis Cache
-1. ```wget http://download.redis.io/redis-stable.tar.gz```
-2. ```tar xvzf redis-stable.tar.gz```
-3. ```cd redis-stable```
-4. ```make```
-5. ```sudo yum install -y tcl```
-  a. This might be needed to test to see if Redis is installed correctly
-6. ```make test``` to test Redis
-  a. ```\o/ All tests passed without errors!``` is what you should see if all the tests pass and Redis is installed correctly
+| Method | RPS    | Response Times | Error Rate |
+| ------ | ------ | ------         | ------     |
+| GET    | 1      | 60 ms          | 0.0%       |
+| GET    | 10     | 60 ms          | 0.0%       |
+| GET    | 100    | 60 ms          | 0.0%       |
+| GET    | 1k     | 60 ms          | 0.0%       |
+| POST   | 1      | 69 ms          | 0.0%       |
+| POST   | 10     | 66 ms          | 0.0%       |
+| POST   | 100    | 65 ms          | 0.0%       |
+| POST   | 1K     | 66 ms          | 0.0%       |
+
+### 3.4.5 Installing Redis Cache
+1. ```sudo yum -y install gcc make # install GCC compiler```
+2. ```cd /usr/local/src```
+3. ```sudo wget http://download.redis.io/redis-stable.tar.gz```
+4. ```sudo tar xvzf redis-stable.tar.gz```
+5. ```sudo rm -f redis-stable.tar.gz```
+6. ```cd redis-stable```
+7. ```sudo make```
+8. ```sudo yum install -y tcl```
+  * This might be needed to test to see if Redis is installed correctly
+9. ```sudo make test``` to test Redis
+  * ```\o/ All tests passed without errors!``` is what you should see if all the tests pass and Redis is installed correctly
+
+10. ```sudo mkdir /etc/redis```
+11. ```sudo chown ec2-user:ec2-user /etc/redis```
+12. ```sudo cp src/redis-server /usr/local/bin/```
+13. ```sudo cp src/redis-cli /usr/local/bin/```
+12. ```redis-server``` to start the redis server
+13. Open up another terminal and login to EC2 instance
+14. ```redis-cli ping``` to check if Redis is working
+  a. Response back should be 'pong'
+15. ```sudo mkdir -p /etc/redis /var/lib/redis /var/redis/6379```
+
+### 3.4.6 Edting Redis Config File
+
+#### Medium blog posts used
+https://medium.com/@andrewcbass/install-redis-v3-2-on-aws-ec2-instance-93259d40a3ce
+https://medium.com/@feliperohdee/installing-redis-to-an-aws-ec2-machine-2e2c4c443b68
+
+vim /etc/redis/redis.conf
+
+- line 69: ```# bind 127.0.0.1```
+- line 88: ```protected-mode no```
+- line 136: ```daemonize yes```
+- line 158: ```pidfile /etc/redis/redis.pid```
+- line 171: ```logfile /etc/redis/redis_log```
+- line 263: ```dir /etc/redis```
+
+vim commands:
+- ```:set number``` will show vim line numbers
+- ```i``` will allow you to edit
+- ```esc``` will stop edit
+- ```:wq``` will quit and save
+- ```:q!``` will force quit
