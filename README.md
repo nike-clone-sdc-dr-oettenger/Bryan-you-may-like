@@ -114,14 +114,29 @@ curl -X PUT $SERVER/youmaylike/575e92f698c0539c07c23a7a280024cb -d "{\"name\":\"
 
 ## 3.0 Log 
 
-### Issue Complaints
-1.  At first I was going to use Postgres, but for some reason, I wasn't able to grasp how it worked. I tried for a few days, but couldn't figure it out. I did some research and there is a "knex" SQL query builder that I looked into and tried using that, but couldn't figuer it out. In the end, I decided to just use Mysql since I was a bit more familiar with it. It ended up being okay. 
+### Issue Complaints/Ranting
+*  At first I was going to use Postgres, but for some reason, I wasn't able to grasp how it worked. I tried for a few days, but couldn't figure it out. I did some research and there is a "knex" SQL query builder that I looked into and tried using that, but couldn't figuer it out. In the end, I decided to just use Mysql since I was a bit more familiar with it. It ended up being okay. 
 
-2. It was stated that Cassandra was a pain, so I decided not to go that route. The next thing to use on Learn mentioned Riak, but it did not seem like there was very much information on it and I did not like the documentation. My SDC mates decided to use CouchDB so I followed their lead.
+* It was stated that Cassandra was a pain, so I decided not to go that route. The next thing to use on Learn mentioned Riak, but it did not seem like there was very much information on it and I did not like the documentation. My SDC mates decided to use CouchDB so I followed their lead.
+
+* I had my service and my MySQL database successfully deployed, but ran into a lot of problems connecting the two instances. I received this error a lot:
+
+    * ```error connection refused is using 127.0.0.1```
+
+  The solution to this problem ended up being some permissions problems that needed to be made in MySQL. I had to create a user and password for MySQL and then grant privileges to that user.
+
+  ```CREATE USER 'username'@'service ip address' IDENTIFIED BY 'password';```
+  ```GRANT ALL PRIVILEGES ON *.* TO 'username'@'service ip address';```
+
+  The important part about this was to put the "service IP address" in, NOT the EC2 instance site. If errors persisted asking about privileges to the user at a certain host IP, I would just add another privilege to that user. I'm not sure if this was the most correct way of solving this issue, but I got it working with the service and database so it'll do.
+
+  Special shoutout to my SDC mates Ryan Miller and Marcus Young for helping me with this issue since I was struggling with it for a while. 
+
+* Getting Redis installed and ready for my instance was difficult. I felt like I didn't quite know what I was doing and was blindly throwing code at thte instance to get it to work. I believe I got Redis installed properly since the test command to make sure that the Redis server was running properly responded with "PONG". However, I didn't notice any difference in the test benchmarking so I think I might have done something wrong. 
 
 ### 3.1 MySql Issues
 
-1.  It took me a while to figure out how to batch the data. Eventually, I found batching the data would help me seed the data without the server timing out. Also, learning more about async and await was extremely helpful
+1.  It took me a while to figure out how to batch the data. Eventually, I found batching the data would help me seed the data without the server timing out. Also, learning more about async and await was extremely helpful. I think I could have played around with this code a bit more to make it seed more efficiently, but I got it working and just continued on instead of using more time that I didn't really have.
 
 ### 3.2 CouchDB Issues
 
@@ -133,7 +148,7 @@ curl -X PUT $SERVER/youmaylike/575e92f698c0539c07c23a7a280024cb -d "{\"name\":\"
 - copy license key: 10024f6bcc411343a7fb86dac7de49da99d92d16
 - copy newrelic.js from node_modules/newrelic into root directory
 
-### MySQL Database seeding
+### 3.5 MySQL Database seeding
 
 This part took me a while to figure out. My seeding would always time out and then I would always get these protocol errors when seeding my database. After a lot of playing around with how the code was seeded and revising my seeding file, I was able to seed my database successfully with 10,000,000 records.
 
@@ -145,7 +160,7 @@ Ending time 7:16:16 PM
 Total Counter: 10000000
 ```
 
-### 3.4 DMBS Benchmarking
+### 3.6 DMBS Benchmarking
 
 1. Using the mysql benchmark function, I queried 1 million records.
 
@@ -160,14 +175,14 @@ mysql> SELECT BENCHMARK(1000000,1+1);
 ```
 
 
-#### 3.4.1 k6 Setup
+#### 3.6.1 k6 Setup
 
 - brew install k6
 - load the script
   - k6 run k6Tests.js
 
 
-#### 3.4.2 Deploying on EC2
+#### 3.6.2 Deploying on EC2
 
 1.  CD into the folder with the .pem file that you downloaded from starting the EC2 instance
 2.  ```chmod 400 youMayLike.pem```
@@ -182,7 +197,7 @@ mysql> SELECT BENCHMARK(1000000,1+1);
 6.  git clone <repo>
 7.  cd into <repo>
 
-#### 3.4.3 Installing mySQL in EC2 Instance
+#### 3.6.3 Installing mySQL in EC2 Instance
 
 1.  CD into the folder with the .pem file that you downloaded from starting the EC2 instance
 2.  ```chmod 400 youMayLikeDB.pem```
@@ -193,7 +208,7 @@ mysql> SELECT BENCHMARK(1000000,1+1);
 5.  Start the mysql ```sudo service mysqld start```
 6.  Seed the database: ```node database/mysql/mysql-seed.js && sleep 2 && nodemon server/server.js```
 
-### 3.4.4 Initial Testing
+### 3.6.4 Initial Testing
 
 | Method | RPS    | Response Times | Error Rate |
 | ------ | ------ | ------         | ------     |
@@ -206,7 +221,7 @@ mysql> SELECT BENCHMARK(1000000,1+1);
 | POST   | 100    | 65 ms          | 0.0%       |
 | POST   | 1K     | 66 ms          | 0.0%       |
 
-### 3.4.5 Installing Redis Cache
+### 3.6.5 Installing Redis Cache
 1. ```sudo yum -y install gcc make # install GCC compiler```
 2. ```cd /usr/local/src```
 3. ```sudo wget http://download.redis.io/redis-stable.tar.gz```
@@ -227,14 +242,16 @@ mysql> SELECT BENCHMARK(1000000,1+1);
 13. Open up another terminal and login to EC2 instance
 14. ```redis-cli ping``` to check if Redis is working
   a. Response back should be 'pong'
-15. ```sudo mkdir -p /etc/redis /var/lib/redis /var/redis/6379```
 
-### 3.4.6 Edting Redis Config File
+There were many trials and errors installing Redis for me. Navigating through all of the folders was exhausting and confusing through terminal. Often times my Redis would not run properly or I would get an error. Make sure that you have the latest repo from the master before you make any changes in vim. 
+
+### 3.6.6 Edting Redis Config File
 
 #### Medium blog posts used
 https://medium.com/@andrewcbass/install-redis-v3-2-on-aws-ec2-instance-93259d40a3ce
 https://medium.com/@feliperohdee/installing-redis-to-an-aws-ec2-machine-2e2c4c443b68
 
+#### What to edit in the config file
 vim /etc/redis/redis.conf
 
 - line 69: ```# bind 127.0.0.1```
